@@ -1,0 +1,30 @@
+language: go
+
+services:
+  - postgresql
+
+sudo: false
+
+os:
+  - linux
+  - osx
+
+dist: xenial
+
+env:
+  - GO_ENV=test
+  - GO111MODULE=on
+
+before_script:
+  - psql -c 'create database buffalo_spelunking_test;' -U postgres
+  - mkdir -p $TRAVIS_BUILD_DIR/public/assets
+
+go:
+  - "1.11.x"
+  - master
+
+go_import_path: github.com/JDWardle/buffalo_spelunking
+
+script:
+  - buffalo build
+  - buffalo test
