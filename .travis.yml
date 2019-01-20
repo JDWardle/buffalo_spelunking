@@ -11,8 +11,7 @@ os:
 dist: xenial
 
 before_script:
-  - psql -c "create user buffalo_spelunking with password 'devpassword';" -U postgres
-  - psql -c 'create database buffalo_spelunking_test owner buffalo_spelunking;' -U postgres
+  - psql -c "create user buffalo_spelunking with password 'devpassword' createdb;" -U postgres
   - mkdir -p $TRAVIS_BUILD_DIR/public/assets
   - go get -u -v github.com/gobuffalo/buffalo/buffalo
   - wget https://raw.githubusercontent.com/creationix/nvm/v0.34.0/nvm.sh -O ~/.nvm/nvm.sh
