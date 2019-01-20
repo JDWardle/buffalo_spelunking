@@ -10,6 +10,12 @@ os:
 
 dist: xenial
 
+cache:
+  directories:
+    - $HOME/.cache/go-build
+    - $HOME/gopath/pkg/mod
+    - node_modules
+
 before_script:
   - psql -c "create user buffalo_spelunking with password 'devpassword' superuser;" -U postgres
   - mkdir -p $TRAVIS_BUILD_DIR/public/assets
