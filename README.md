@@ -1,4 +1,5 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/JDWardle/buffalo_spelunking)](https://goreportcard.com/report/github.com/JDWardle/buffalo_spelunking)
+[![Build Status](https://travis-ci.com/JDWardle/buffalo_spelunking.svg?branch=master)](https://travis-ci.com/JDWardle/buffalo_spelunking)
 
 # Welcome to Buffalo!
 
