@@ -1,13 +1,24 @@
 development:
   dialect: postgres
-  database: buffalo_spelunking_development
-  user: postgres
-  password: postgres
-  host: 127.0.0.1
-  pool: 5
+  database: {{envOr "DATABASE_NAME" "buffalo_spelunking_development"}}
+  user: {{envOr "DATABASE_USER" "buffalo_spelunking"}}
+  password: {{envOr "DATABASE_PASSWORD" "devpassword"}}
+  host: {{envOr "DATABASE_HOST" "127.0.0.1"}}
+  port: {{envOr "DATABASE_PORT" "5432"}}
+  pool: {{envOr "DATABASE_POOL" "5"}}
+  options:
+    sslmode: {{envOr "DATABASE_SSLMODE" "disable"}}
 
 test:
-  url: {{envOr "TEST_DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/buffalo_spelunking_test?sslmode=disable"}}
+  dialect: postgres
+  database: {{envOr "DATABASE_NAME" "buffalo_spelunking_test"}}
+  user: {{envOr "DATABASE_USER" "buffalo_spelunking"}}
+  password: {{envOr "DATABASE_PASSWORD" "devpassword"}}
+  host: {{envOr "DATABASE_HOST" "127.0.0.1"}}
+  port: {{envOr "DATABASE_PORT" "5432"}}
+  pool: {{envOr "DATABASE_POOL" "5"}}
+  options:
+    sslmode: {{envOr "DATABASE_SSLMODE" "disable"}}
 
 production:
   url: {{envOr "DATABASE_URL" "postgres://postgres:postgres@127.0.0.1:5432/buffalo_spelunking_production?sslmode=disable"}}
