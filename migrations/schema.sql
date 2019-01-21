@@ -34,6 +34,22 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: posts; Type: TABLE; Schema: public; Owner: buffalo_spelunking
+--
+
+CREATE TABLE public.posts (
+    id uuid NOT NULL,
+    content text NOT NULL,
+    user_id uuid NOT NULL,
+    topic_id uuid NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.posts OWNER TO buffalo_spelunking;
+
+--
 -- Name: schema_migration; Type: TABLE; Schema: public; Owner: buffalo_spelunking
 --
 
@@ -43,6 +59,21 @@ CREATE TABLE public.schema_migration (
 
 
 ALTER TABLE public.schema_migration OWNER TO buffalo_spelunking;
+
+--
+-- Name: topics; Type: TABLE; Schema: public; Owner: buffalo_spelunking
+--
+
+CREATE TABLE public.topics (
+    id uuid NOT NULL,
+    title character varying(255) NOT NULL,
+    user_id uuid NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.topics OWNER TO buffalo_spelunking;
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: buffalo_spelunking
@@ -60,6 +91,22 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO buffalo_spelunking;
 
 --
+-- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: buffalo_spelunking
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: topics topics_pkey; Type: CONSTRAINT; Schema: public; Owner: buffalo_spelunking
+--
+
+ALTER TABLE ONLY public.topics
+    ADD CONSTRAINT topics_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: buffalo_spelunking
 --
 
@@ -72,6 +119,30 @@ ALTER TABLE ONLY public.users
 --
 
 CREATE UNIQUE INDEX schema_migration_version_idx ON public.schema_migration USING btree (version);
+
+
+--
+-- Name: posts posts_topic_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: buffalo_spelunking
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_topic_id_fkey FOREIGN KEY (topic_id) REFERENCES public.topics(id) ON DELETE CASCADE;
+
+
+--
+-- Name: posts posts_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: buffalo_spelunking
+--
+
+ALTER TABLE ONLY public.posts
+    ADD CONSTRAINT posts_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- Name: topics topics_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: buffalo_spelunking
+--
+
+ALTER TABLE ONLY public.topics
+    ADD CONSTRAINT topics_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
 
 
 --

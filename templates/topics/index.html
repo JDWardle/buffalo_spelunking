@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h1>Topics</h1>
+</div>
+<ul class="list-unstyled list-inline">
+  <li><a href="<%= newTopicsPath() %>" class="btn btn-primary">Create New Topic</a></li>
+</ul>
+
+<table class="table table-striped">
+  <thead>
+  <th>&nbsp;</th>
+  </thead>
+  <tbody>
+    <%= for (topic) in topics { %>
+      <tr>
+      <td>
+          <div class="pull-right">
+            <a href="<%= topicPath({ topic_id: topic.ID }) %>" class="btn btn-info">View</a>
+            <a href="<%= editTopicPath({ topic_id: topic.ID }) %>" class="btn btn-warning">Edit</a>
+            <a href="<%= topicPath({ topic_id: topic.ID }) %>" data-method="DELETE" data-confirm="Are you sure?" class="btn btn-danger">Destroy</a>
+          </div>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<div class="text-center">
+  <%= paginator(pagination) %>
+</div>

@@ -68,6 +68,9 @@ func App() *buffalo.App {
 		app.POST("/signin", AuthCreate)
 		app.DELETE("/signout", AuthDestroy)
 		app.Middleware.Skip(Authorize, HomeHandler, UsersNew, UsersCreate, AuthNew, AuthCreate)
+
+		app.Resource("/topics", TopicsResource{})
+		app.Resource("/posts", PostsResource{})
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

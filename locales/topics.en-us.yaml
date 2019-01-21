@@ -1,0 +1,6 @@
+- id: "topic.created.success"
+  translation: "Topic was successfully created."
+- id: "topic.updated.success"
+  translation: "Topic was successfully updated."
+- id: "topic.destroyed.success"
+  translation: "Topic was successfully destroyed."

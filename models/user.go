@@ -21,6 +21,9 @@ type User struct {
 	Email        string    `json:"email" db:"email"`
 	PasswordHash string    `json:"password_hash" db:"password_hash"`
 
+	Topics []Topic `has_many:"topics"`
+	Posts  []Post  `has_many:"posts"`
+
 	Password             string `json:"-" db:"-"`
 	PasswordConfirmation string `json:"-" db:"-"`
 }
